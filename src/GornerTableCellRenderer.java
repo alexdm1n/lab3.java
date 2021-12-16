@@ -35,7 +35,6 @@ public class GornerTableCellRenderer implements TableCellRenderer {
         else if(a < 0)  panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         else panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-
         if (coolSearch && isNearPrime(formattedValue)) panel.setBackground(Color.RED);
         else if (requiredValue != null && requiredValue.equals(formattedValue)) panel.setBackground(Color.RED);
         else panel.setBackground(Color.WHITE);

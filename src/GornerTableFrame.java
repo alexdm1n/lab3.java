@@ -108,13 +108,24 @@ public class GornerTableFrame extends JFrame {
                     Double test = Double.parseDouble(value);
                     double xBeg1 = Double.parseDouble(xBegTF.getText());
                     double xEnd1 = Double.parseDouble(xEndTF.getText());
-                    if(test <= xEnd1 && test >= xBeg1){
+                    double xnachalo = ((xEnd1 - xBeg1 + 1)/4);
+
+                    if(test < 2 * xnachalo && test > xnachalo){
 
 
                     } else {
-                        renderer.setRequiredValue(value);
-                        renderer.setCoolSearch(false);
-                        repaint();
+                        if (value == "0")
+                        {
+                            renderer.setRequiredValue("0");
+                            renderer.setCoolSearch(false);
+                            repaint();
+                        }
+                        else {
+                            renderer.setRequiredValue(test.toString());
+                            renderer.setCoolSearch(false);
+                            repaint();
+                        }
+
                     }
                 } catch (NumberFormatException exception) {
                     JOptionPane.showMessageDialog(GornerTableFrame.this, "Неверные данные", "Ошибка", JOptionPane.WARNING_MESSAGE);
