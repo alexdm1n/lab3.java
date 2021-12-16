@@ -175,7 +175,7 @@ public class GornerTableFrame extends JFrame {
         stepTF.setMaximumSize(stepTF.getPreferredSize());
 
         Box hBoxTextFields = Box.createHorizontalBox();
-        //hBoxTextFields.setBorder(BorderFactory.createBevelBorder(1));
+        hBoxTextFields.setBorder(BorderFactory.createBevelBorder(1));
         hBoxTextFields.add(Box.createHorizontalGlue());
         hBoxTextFields.add(xBegLabel);
         hBoxTextFields.add(Box.createHorizontalStrut(10));
@@ -277,56 +277,5 @@ public class GornerTableFrame extends JFrame {
         ));
 
         add(hBoxButtons, BorderLayout.NORTH);
-    }
-
-    void saveToTxt(File file) {
-        try {
-            PrintStream out = new PrintStream(file);
-            out.println("Результаты табулирования по схеме Горнера");
-            out.print("Многочлен: ");
-            for (int i = 0; i < coefficients.length; i++) {
-                out.print(coefficients[i] + "*x^" + i);
-                if (i != coefficients.length - 1) {
-                    out.print(" + ");
-                }
-            }
-            out.println("");
-            out.println("Интервал от " + renderer.getFormatter().format(dataTable.getXBeg()) + " до " + renderer.getFormatter().format(dataTable.getXEnd()) + " с шагом " + renderer.getFormatter().format(dataTable.getStep()));
-            out.println("\n\n");
-            for (int i = 0; i < dataTable.getRowCount(); i++) {
-                out.println("F(" + renderer.getFormatter().format(dataTable.getValueAt(i, 0)) + ") = " + renderer.getFormatter().format(dataTable.getValueAt(i, 1)) + " или " + renderer.getFormatter().format(dataTable.getValueAt(i, 2)) + ", с разницей " + renderer.getFormatter().format(dataTable.getValueAt(i, 3)));
-            }
-            out.close();
-        } catch (FileNotFoundException ignore) {
-
-        }
-    }
-
-    void saveToBin(File file) {
-        try {
-            DataOutputStream out = new DataOutputStream(new FileOutputStream(file));
-            for (int i = 0; i < dataTable.getRowCount(); i++) {
-                out.writeDouble((Double) dataTable.getValueAt(i, 0));
-                out.writeDouble((Double) dataTable.getValueAt(i, 1));
-            }
-            out.close();
-        } catch (Exception ignore) {
-
-        }
-    }
-
-    void saveToCsv(File file) {
-        try {
-            PrintStream out = new PrintStream(file);
-            for (int i = 0; i < dataTable.getRowCount(); i++) {
-                out.print(dataTable.getValueAt(i, 0) + ",");
-                out.print(dataTable.getValueAt(i, 1) + ",");
-                out.print(dataTable.getValueAt(i, 2) + ",");
-                out.println(dataTable.getValueAt(i, 3));
-            }
-            out.close();
-        } catch (FileNotFoundException ignore) {
-
-        }
     }
 }
